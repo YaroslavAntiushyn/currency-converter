@@ -12,7 +12,7 @@ export default function Home() {
     const [rates, setRates] = useState([]);
 
     useEffect(() => {
-        axios.get('https://api.apilayer.com/fixer/latest?apikey=3gZZkUZwuTErEyu0NDaNPENNnIfJ98o5')
+        axios.get('https://api.apilayer.com/fixer/latest?apikey=3gZZkUZwuTErEyu0NDaNPENNnIfJ  98o5')
             .then(response => {
                 setRates(response.data.rates);
             })

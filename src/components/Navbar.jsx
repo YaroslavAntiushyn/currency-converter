@@ -1,34 +1,35 @@
-import Container from 'react-bootstrap/Container';
-import Navbar from 'react-bootstrap/Navbar';
-import { useState, useEffect } from 'react';
-import axios from "axios";
+import Container from "react-bootstrap/Container";
+import Navbar from "react-bootstrap/Navbar";
+import { useState, useEffect } from "react";
+import useFetch from "../hooks/useFetch";
 
 function NavScrollExample() {
+  const [ratesuah, setRatesuah] = useState([]);
 
-    const [ratesuah, setRatesuah] = useState([]);
+  const url = `https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5`;
+  const { data, isLoading, error } = useFetch(url);
 
-    useEffect(() => {
-        axios.get('https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5')
-            .then(response => {
-                setRatesuah(response.data);
-            })
-    }, []);
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+  if (error) {
+    return <p>error</p>;
+  }
 
   return (
     <Navbar bg="light" expand="lg">
       <Container fluid>
-        <Navbar.Brand href="#" >Currency converter</Navbar.Brand>
+        <Navbar.Brand href="#">Currency converter</Navbar.Brand>
         <ul>
-            {ratesuah.map( (item) => {
-                    return (
-                        <li>{item.ccy} {item.buy} / {item.sale}</li>
-                        )
-                        
-
-            })}
+          {data.map((item) => {
+            return (
+              <li key={item.ccy}>
+                {item.ccy} {item.buy} / {item.sale}
+              </li>
+            );
+          })}
         </ul>
       </Container>
-
     </Navbar>
   );
 }
