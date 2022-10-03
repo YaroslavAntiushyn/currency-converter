@@ -12,7 +12,7 @@ export default function Home() {
     // const [rates, setRates] = useState([]);
 
 
-    const url = `https://api.apilayer.com/fixer/latest?apikey=3gZZkUZwuTErEyu0NDaNPE  NNnIfJ98o5`;
+    const url = `https://api.apilayer.com/fixer/latest?apikey=3gZZkUZwuTErEyu0NDaNPENNnIfJ98o5`;
     const { data, isLoading, error } = useFetch(url);
   
     useEffect(() => {
@@ -48,22 +48,21 @@ export default function Home() {
         setAmount2(fix(amount1 * data.rates[currency2] / data.rates[currency1]));
         setAmount1(amount1);
     }
+    
+    function handleAmount2Change(amount2) {
+        setAmount1(fix(amount2 * data.rates[currency1] / data.rates[currency2]));
+        setAmount2(amount2);
+    }
 
     function handleCurrency1Change(currency1) {
         setAmount2(fix(amount1 * data.rates[currency2] / data.rates[currency1]));
         setCurrency1(currency1);
     }
 
-    function handleAmount2Change(amount2) {
-        setAmount1(fix(amount2 * data.rates[currency1] / data.rates[currency2]));
-        setAmount2(amount2);
-    }
-
     function handleCurrency2Change(currency2) {
         setAmount1(fix(amount2 * data.rates[currency1] / data.rates[currency2]));
         setCurrency2(currency2);
     }
-
 
     return (
         <main>
