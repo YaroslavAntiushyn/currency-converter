@@ -7,6 +7,7 @@ export default function CurrencyInput(props) {
         currency: PropTypes.string.isRequired,
         currencies: PropTypes.array,
         onAmountChange: PropTypes.func,
+        onCurrencyChange: PropTypes.func
     }
 
     return (
